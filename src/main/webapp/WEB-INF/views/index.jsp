@@ -36,6 +36,8 @@
 <div class="container">
     <div class="absolute-center is-responsive">
         <div class="jumbotron">
+            <strong><c:out value="${name}"/></strong>
+
             <form action="login" method="POST">
                 Enter username: <input class="form-control" type="text" name="uname"><br/>
                 Enter password: <input class="form-control" type="password" name="pass"><br/><br/>

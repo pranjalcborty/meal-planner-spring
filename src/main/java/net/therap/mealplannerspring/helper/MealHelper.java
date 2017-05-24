@@ -8,7 +8,6 @@ import net.therap.mealplannerspring.domain.Meal;
 import net.therap.mealplannerspring.enums.Day;
 import net.therap.mealplannerspring.enums.Type;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -52,7 +51,7 @@ public class MealHelper {
         mealDao.addItemsToMeal(day, type, items);
     }
 
-    public void addItem(String itemName) throws SQLException {
+    public void addItem(String itemName) {
         itemDao.addItem(itemName);
     }
 

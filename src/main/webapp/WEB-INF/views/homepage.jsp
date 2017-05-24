@@ -36,8 +36,8 @@
     <div class="absolute-center is-responsive">
         <div class="jumbotron">
             <h3>Hello <c:out value="${uname}"/></h3>
-            <a href="plans" class="btn btn-info" role="button">See current plans</a><br/>
-            <a href="items" class="btn btn-info" role="button">See current items</a><br/>
+            <a href="viewPlans" class="btn btn-info" role="button">See current plans</a><br/>
+            <a href="viewItems" class="btn btn-info" role="button">See current items</a><br/>
             <a href="addItem" class="btn btn-info" role="button">Add a item</a><br/>
             <a href="addPlan" class="btn btn-info" role="button">Add your own plan</a><br><br/>
 

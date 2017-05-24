@@ -19,8 +19,8 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         <!--property name="hbm2ddl.auto">update</property-->
-        <mapping class="net.therap.mealplannerjsp.domain.Meal"/>
-        <mapping class="net.therap.mealplannerjsp.domain.Item"/>
-        <mapping class="net.therap.mealplannerjsp.domain.User"/>
+        <mapping class="net.therap.mealplannerspring.domain.Meal"/>
+        <mapping class="net.therap.mealplannerspring.domain.Item"/>
+        <mapping class="net.therap.mealplannerspring.domain.User"/>
     </session-factory>
 </hibernate-configuration>
