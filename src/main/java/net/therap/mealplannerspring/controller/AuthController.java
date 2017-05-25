@@ -2,7 +2,7 @@ package net.therap.mealplannerspring.controller;
 
 
 import net.therap.mealplannerspring.helper.Constants;
-import net.therap.mealplannerspring.helper.MealHelper;
+import net.therap.mealplannerspring.helper.Helper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +34,7 @@ public class AuthController {
     public String postAuth(@RequestParam(Constants.USER_NAME) String userName,
                            @RequestParam(Constants.PASSWORD) String password, HttpSession session) {
 
-        MealHelper helper = new MealHelper();
+        Helper helper = new Helper();
 
         if (helper.isAllowed(userName, password)) {
             session.setAttribute(USER_NAME, userName);

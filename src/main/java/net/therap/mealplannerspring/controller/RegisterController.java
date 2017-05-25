@@ -1,7 +1,7 @@
 package net.therap.mealplannerspring.controller;
 
 import net.therap.mealplannerspring.helper.Constants;
-import net.therap.mealplannerspring.helper.MealHelper;
+import net.therap.mealplannerspring.helper.Helper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ public class RegisterController {
                                    @RequestParam(Constants.USER_NAME) String uName,
                                    @RequestParam(Constants.PASSWORD) String password, ModelMap model) {
 
-        MealHelper helper = new MealHelper();
+        Helper helper = new Helper();
 
         if (helper.contains(uName)) {
             model.put(Constants.FAILURE_NOTIFY, USERNAME_EXISTS);

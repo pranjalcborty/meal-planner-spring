@@ -2,7 +2,7 @@ package net.therap.mealplannerspring.controller;
 
 import net.therap.mealplannerspring.domain.Item;
 import net.therap.mealplannerspring.helper.Constants;
-import net.therap.mealplannerspring.helper.MealHelper;
+import net.therap.mealplannerspring.helper.Helper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,7 @@ public class AddPlanController {
     public String postNewMeal(@RequestParam(ITEMS) String[] items, @RequestParam(TYPE) String type,
                               @RequestParam(DAY) String day, ModelMap model) {
 
-        MealHelper helper = new MealHelper();
+        Helper helper = new Helper();
 
         helper.addPlan(day, type, Arrays.asList(items));
         model.put(Constants.ADD_PLAN_NOTIFY, PLAN_ADDED);
@@ -38,7 +38,7 @@ public class AddPlanController {
 
     @RequestMapping(value = Constants.ADD_PLAN_PATH, method = RequestMethod.GET)
     public String getNewMeal(ModelMap model) {
-        MealHelper helper = new MealHelper();
+        Helper helper = new Helper();
         List<Item> items = helper.showItems();
         model.put(Constants.ITEM_LIST, items);
         return Constants.ABS_ADD_PLAN_PATH;
