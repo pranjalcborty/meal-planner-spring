@@ -3,6 +3,7 @@ package net.therap.mealplannerspring.controller;
 import net.therap.mealplannerspring.domain.Item;
 import net.therap.mealplannerspring.helper.Constants;
 import net.therap.mealplannerspring.service.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,12 +21,8 @@ public class ItemController {
 
     private static final String ITEM_ADDED = "Item added";
 
+    @Autowired
     private Service helper;
-
-    public ItemController() {
-        super();
-        this.helper = new Service();
-    }
 
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.POST)
     public String add(@ModelAttribute Item item, ModelMap model) {

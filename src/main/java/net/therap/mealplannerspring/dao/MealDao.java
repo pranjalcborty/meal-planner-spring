@@ -7,6 +7,7 @@ import net.therap.mealplannerspring.enums.Type;
 import net.therap.mealplannerspring.helper.HibernateHelper;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -25,12 +26,7 @@ public class MealDao {
         return meals;
     }
 
-    public void addItemsToMeal(Day day, Type type, List<Item> items) {
-        Meal meal = new Meal();
-        meal.setDay(day);
-        meal.setType(type);
-        meal.setItems(items);
-
+    public void addItemsToMeal(Meal meal) {
         Session session = HibernateHelper.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(meal);

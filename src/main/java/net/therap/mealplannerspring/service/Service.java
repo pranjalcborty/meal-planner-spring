@@ -8,9 +8,9 @@ import net.therap.mealplannerspring.domain.Item;
 import net.therap.mealplannerspring.domain.Meal;
 import net.therap.mealplannerspring.domain.User;
 import net.therap.mealplannerspring.enums.Day;
-import net.therap.mealplannerspring.enums.Option;
 import net.therap.mealplannerspring.enums.Type;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,6 @@ import java.util.Map;
  */
 public class Service {
 
-    private static final Map<Integer, Option> optionMap = new HashMap<>();
     private static final Map<Integer, Day> dayMap = new HashMap<>();
     private static final Map<Integer, Type> typeMap = new HashMap<>();
     private MealDao mealDao;
@@ -29,11 +28,6 @@ public class Service {
     private UserDao userDao;
 
     static {
-        optionMap.put(1, Option.VIEW_PLAN);
-        optionMap.put(2, Option.VIEW_ITEMS);
-        optionMap.put(3, Option.ADD_PLAN);
-        optionMap.put(4, Option.ADD_ITEM);
-
         dayMap.put(1, Day.SUN);
         dayMap.put(2, Day.MON);
         dayMap.put(3, Day.TUE);
@@ -75,12 +69,9 @@ public class Service {
         return meals;
     }
 
-    public void addPlan(String dayNum, String typeNum, List<String> itemsNum) {
-        Day day = daySelect(dayNum);
-        Type type = typeSelect(typeNum);
-        List<Item> items = itemDao.getItems(itemsNum);
-
-        mealDao.addItemsToMeal(day, type, items);
+    @Transactional
+    public void addPlan(Meal meal) {
+        mealDao.addItemsToMeal(meal);
     }
 
     public void addItem(Item item) {

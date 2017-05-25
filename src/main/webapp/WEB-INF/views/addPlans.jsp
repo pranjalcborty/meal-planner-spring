@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%>
 
 <html>
 <head>
@@ -35,49 +36,27 @@
 <body>
 <div class="container">
     <div class="absolute-center is-responsive">
-        <form method="POST">
+        <s:form action="addPlan" method="POST" commandName="meal">
             <div class="jumbotron">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary">
-                        <input type="radio" value="1" name="type" checked>Breakfast
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="radio" value="2" name="type">Lunch
-                    </label>
+                    <s:radiobuttons path="type" items="${types}" itemLabel="label" element="span class='btn btn-primary'"/>
                 </div>
                 <br/>
                 <br/>
 
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary">
-                        <input type="radio" value="1" name="day" checked>Sunday
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="radio" value="2" name="day">Monday
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="radio" value="3" name="day">Tuesday
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="radio" value="4" name="day">Wednesday
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="radio" value="5" name="day">Thursday
-                    </label>
-                    <br>
+                    <s:radiobuttons path="day" items="${days}" itemLabel="label" element="span class='btn btn-primary'"/>
                 </div>
+
             </div>
 
             <div class="jumbotron">
-                <c:forEach var="item" items="${items}">
-                    <input type="checkbox" value="${item.id}" name="items">
-                    <c:out value="${item.name}"/><br/>
-                </c:forEach>
+                <s:checkboxes path="items" items="${items}" itemLabel="name" itemValue="id" delimiter="<br/>"/>
             </div>
 
             <input type="submit" class="btn btn-success" value="Add plan">
 
-        </form>
+        </s:form>
 
         <c:if test="${messageAddPlan != null}">
             <strong><c:out value="${messageAddPlan}"/></strong><br/>
