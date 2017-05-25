@@ -13,23 +13,12 @@ import java.util.List;
  */
 public class UserDao {
 
-    public boolean addUser(String fullName, String uName, String pass) {
-        if (!contains(uName)) {
-            User user = new User();
-            user.setFullName(fullName);
-            user.setUname(uName);
-            user.setPass(pass);
-
-            Session session = HibernateHelper.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
-            session.close();
-
-            return true;
-        }
-
-        return false;
+    public void addUser(User user) {
+        Session session = HibernateHelper.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(user);
+        session.getTransaction().commit();
+        session.close();
     }
 
     public boolean contains(String uName) {

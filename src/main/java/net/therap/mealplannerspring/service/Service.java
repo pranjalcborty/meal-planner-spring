@@ -1,4 +1,4 @@
-package net.therap.mealplannerspring.helper;
+package net.therap.mealplannerspring.service;
 
 
 import net.therap.mealplannerspring.dao.ItemDao;
@@ -6,6 +6,7 @@ import net.therap.mealplannerspring.dao.MealDao;
 import net.therap.mealplannerspring.dao.UserDao;
 import net.therap.mealplannerspring.domain.Item;
 import net.therap.mealplannerspring.domain.Meal;
+import net.therap.mealplannerspring.domain.User;
 import net.therap.mealplannerspring.enums.Day;
 import net.therap.mealplannerspring.enums.Option;
 import net.therap.mealplannerspring.enums.Type;
@@ -18,7 +19,7 @@ import java.util.Map;
  * @author pranjal.chakraborty
  * @since 5/10/17
  */
-public class Helper {
+public class Service {
 
     private static final Map<Integer, Option> optionMap = new HashMap<>();
     private static final Map<Integer, Day> dayMap = new HashMap<>();
@@ -43,7 +44,7 @@ public class Helper {
         typeMap.put(2, Type.LUNCH);
     }
 
-    public Helper() {
+    public Service() {
         this.mealDao = new MealDao();
         this.itemDao = new ItemDao();
         this.userDao = new UserDao();
@@ -56,16 +57,17 @@ public class Helper {
     public static Type getType(int input) {
         return typeMap.get(input);
     }
+
     public Day daySelect(String day) {
         int daySelected = Integer.parseInt(day);
 
-        return Helper.getDay(daySelected);
+        return getDay(daySelected);
     }
 
     public Type typeSelect(String type) {
         int typeSelected = Integer.parseInt(type);
 
-        return Helper.getType(typeSelected);
+        return getType(typeSelected);
     }
 
     public List<Meal> showMealPlans() {
@@ -81,8 +83,8 @@ public class Helper {
         mealDao.addItemsToMeal(day, type, items);
     }
 
-    public void addItem(String itemName) {
-        itemDao.addItem(itemName);
+    public void addItem(Item item) {
+        itemDao.addItem(item);
     }
 
     public List<Item> showItems() {
@@ -98,7 +100,7 @@ public class Helper {
         return userDao.contains(uName);
     }
 
-    public boolean addUser(String fullName, String uName, String pass) {
-        return userDao.addUser(fullName, uName, pass);
+    public void addUser(User user) {
+        userDao.addUser(user);
     }
 }

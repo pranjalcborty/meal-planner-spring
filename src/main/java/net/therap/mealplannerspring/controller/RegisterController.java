@@ -1,12 +1,13 @@
 package net.therap.mealplannerspring.controller;
 
+import net.therap.mealplannerspring.domain.User;
 import net.therap.mealplannerspring.helper.Constants;
-import net.therap.mealplannerspring.helper.Helper;
+import net.therap.mealplannerspring.service.Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,20 +22,18 @@ public class RegisterController {
     private static final String BLANK_ERROR = "Name, username or password cannot be blank";
 
     @RequestMapping(value = Constants.REGISTER_PATH, method = RequestMethod.POST)
-    public String postRegistration(@RequestParam(Constants.FULL_NAME) String fullName,
-                                   @RequestParam(Constants.USER_NAME) String uName,
-                                   @RequestParam(Constants.PASSWORD) String password, ModelMap model) {
+    public String postRegistration(@ModelAttribute User user, ModelMap model) {
 
-        Helper helper = new Helper();
+        Service helper = new Service();
 
-        if (helper.contains(uName)) {
+        if (helper.contains(user.getUname())) {
             model.put(Constants.FAILURE_NOTIFY, USERNAME_EXISTS);
             return "redirect:" + Constants.REGISTER_PATH;
-        } else if (uName.length() == 0 || password.length() == 0 || fullName.length() == 0) {
+        } else if (user.getUname().length() == 0 || user.getPass().length() == 0 || user.getFullName().length() == 0) {
             model.put(Constants.FAILURE_NOTIFY, BLANK_ERROR);
             return "redirect:" + Constants.REGISTER_PATH;
         } else {
-            helper.addUser(fullName, uName, password);
+            helper.addUser(user);
             return "redirect:" + Constants.LOGIN_PATH;
         }
     }

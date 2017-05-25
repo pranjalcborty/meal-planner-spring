@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Add plans here</title>
@@ -34,7 +35,7 @@
 <body>
 <div class="container">
     <div class="absolute-center is-responsive">
-        <form action="addPlan" method="POST">
+        <form method="POST">
             <div class="jumbotron">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-primary">
@@ -73,12 +74,17 @@
                     <c:out value="${item.name}"/><br/>
                 </c:forEach>
             </div>
+
             <input type="submit" class="btn btn-success" value="Add plan">
+
         </form>
+
         <c:if test="${messageAddPlan != null}">
             <strong><c:out value="${messageAddPlan}"/></strong><br/>
         </c:if>
+
         <a href="home" class="btn btn-info" role="button">Return to main page</a>
+
     </div>
 </div>
 <script src="<c:url value='/assets/js/jquery.min.js'/>"></script>

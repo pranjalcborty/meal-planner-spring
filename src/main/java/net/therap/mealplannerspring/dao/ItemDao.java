@@ -14,10 +14,7 @@ import java.util.List;
  */
 public class ItemDao {
 
-    public void addItem(String itemName) {
-        Item item = new Item();
-        item.setName(itemName);
-
+    public void addItem(Item item) {
         Session session = HibernateHelper.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(item);

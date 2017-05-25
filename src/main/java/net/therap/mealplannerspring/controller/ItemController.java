@@ -1,40 +1,52 @@
 package net.therap.mealplannerspring.controller;
 
+import net.therap.mealplannerspring.domain.Item;
 import net.therap.mealplannerspring.helper.Constants;
-import net.therap.mealplannerspring.helper.Helper;
+import net.therap.mealplannerspring.service.Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author pranjal.chakraborty
  * @since 24-May-17
  */
 @Controller
-public class AddItemController {
+public class ItemController {
 
     private static final String ITEM_ADDED = "Item added";
 
-    private Helper helper;
+    private Service helper;
 
-    public AddItemController() {
+    public ItemController() {
         super();
-        this.helper = new Helper();
+        this.helper = new Service();
     }
 
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.POST)
-    public String postItemView(@RequestParam(Constants.ITEM_NAME) String itemName, ModelMap model) {
+    public String add(@ModelAttribute Item item, ModelMap model) {
 
-        helper.addItem(itemName);
+        helper.addItem(item);
         model.put(Constants.ADD_ITEM_NOTIFY, ITEM_ADDED);
 
         return "redirect:" + Constants.ADD_ITEM_PATH;
     }
 
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.GET)
-    public String getItemView() {
+    public String view() {
         return Constants.ABS_ADD_ITEM_PATH;
+    }
+
+    @RequestMapping(value = Constants.VIEW_ITEMS_PATH, method = RequestMethod.GET)
+    public String itemList(ModelMap model) {
+        Service helper = new Service();
+        List<Item> items = helper.showItems();
+
+        model.put(Constants.ITEM_LIST, items);
+        return Constants.ABS_VIEW_ITEMS_PATH;
     }
 }
