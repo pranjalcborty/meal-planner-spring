@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * @author pranjal.chakraborty
+ * @since 24-May-17
+ */
 @Controller
 public class AddItemController {
+
     private static final String ITEM_ADDED = "Item added";
 
     private MealHelper mealHelper;
@@ -25,7 +30,7 @@ public class AddItemController {
         mealHelper.addItem(itemName);
         model.put(Constants.ADD_ITEM_NOTIFY, ITEM_ADDED);
 
-        return "redirect:"+Constants.ADD_ITEM_PATH;
+        return "redirect:" + Constants.ADD_ITEM_PATH;
     }
 
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.GET)

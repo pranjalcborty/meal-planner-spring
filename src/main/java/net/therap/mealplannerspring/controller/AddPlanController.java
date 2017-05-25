@@ -12,8 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author pranjal.chakraborty
+ * @since 24-May-17
+ */
 @Controller
 public class AddPlanController {
+
     private static final String DAY = "day";
     private static final String TYPE = "type";
     private static final String ITEMS = "items";
@@ -28,7 +33,7 @@ public class AddPlanController {
         helper.addPlan(day, type, Arrays.asList(items));
         model.put(Constants.ADD_PLAN_NOTIFY, PLAN_ADDED);
 
-        return "redirect:"+Constants.ADD_PLAN_PATH;
+        return "redirect:" + Constants.ADD_PLAN_PATH;
     }
 
     @RequestMapping(value = Constants.ADD_PLAN_PATH, method = RequestMethod.GET)

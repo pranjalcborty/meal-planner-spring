@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="1.0" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
     <facet type="web" name="Web Gradle : MealPlannerSpring-1.0.war">
       <configuration>
         <descriptors>
@@ -10,13 +13,10 @@
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/java" />
         </sourceRoots>
       </configuration>
-    </facet>
-    <facet type="Spring" name="Spring">
-      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
@@ -51,7 +51,66 @@
     <orderEntry type="library" exported="" name="Gradle: jandex-1.1.0.Final" level="project" />
     <orderEntry type="library" exported="" name="Gradle: xml-apis-1.0.b2" level="project" />
     <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: mysql-connector-java-5.1.42" level="project" />
-    <orderEntry type="library" name="spring-4.3.8.RELEASE" level="application" />
+    <orderEntry type="library" exported="" name="Gradle: spring-instrument-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-aop-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-beans-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-core-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-core-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-context-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-messaging-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-test-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-jms-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-expression-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-instrument-tomcat-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-tx-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-tx-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-webmvc-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-tx-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-jms-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-jms-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-orm-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-web-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-aop-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-webmvc-portlet-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-messaging-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-oxm-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-aop-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-orm-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-messaging-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-jdbc-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-beans-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-test-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-jdbc-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-orm-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-aspects-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-websocket-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-instrument-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-context-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-webmvc-portlet-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-web-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-webmvc-portlet-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-aspects-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-expression-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-web-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-instrument-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-aspects-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-test-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-webmvc-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-context-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-expression-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-oxm-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-webmvc-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-context-support-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-context-support-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-websocket-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-instrument-tomcat-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-core-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-websocket-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-beans-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-context-support-4.3.8.RELEASE-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-instrument-tomcat-4.3.8.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-oxm-4.3.8.RELEASE-sources" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-jdbc-4.3.8.RELEASE-sources" level="project" />
   </component>
 </module>
 

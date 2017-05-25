@@ -8,10 +8,11 @@ import org.hibernate.Session;
 import java.util.List;
 
 /**
- * @author pcbor
+ * @author pranjal.chakraborty
  * @since 20-May-17
  */
 public class UserDao {
+
     public boolean addUser(String fullName, String uName, String pass) {
         if (!contains(uName)) {
             User user = new User();
