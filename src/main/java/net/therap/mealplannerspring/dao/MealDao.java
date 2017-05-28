@@ -1,14 +1,10 @@
 package net.therap.mealplannerspring.dao;
 
-import net.therap.mealplannerspring.domain.Item;
 import net.therap.mealplannerspring.domain.Meal;
-import net.therap.mealplannerspring.enums.Day;
-import net.therap.mealplannerspring.enums.Type;
-import net.therap.mealplannerspring.helper.HibernateHelper;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
+import net.therap.mealplannerspring.helper.JpaHelper;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -16,21 +12,21 @@ import java.util.List;
  * @since 5/10/17
  */
 public class MealDao {
+    private static final String RETRIEVE_MEAL_QUERY = "SELECT m FROM Meal m";
 
     public List<Meal> getMeals() {
-        Session session = HibernateHelper.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM Meal");
+        EntityManager em = JpaHelper.getEntityManager();
+        TypedQuery<Meal> query = em.createQuery(RETRIEVE_MEAL_QUERY, Meal.class);
 
-        List<Meal> meals = query.list();
-        session.close();
+        List<Meal> meals = query.getResultList();
         return meals;
     }
 
     public void addItemsToMeal(Meal meal) {
-        Session session = HibernateHelper.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(meal);
-        session.getTransaction().commit();
-        session.close();
+        EntityManager em = JpaHelper.getEntityManager();
+        em.getTransaction().begin();
+        em.persist(meal);
+        em.getTransaction().commit();
+        em.close();
     }
 }

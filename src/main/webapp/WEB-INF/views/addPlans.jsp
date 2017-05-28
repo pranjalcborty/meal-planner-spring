@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="s" %>
 
 <html>
 <head>
@@ -39,13 +39,15 @@
         <s:form action="addPlan" method="POST" commandName="meal">
             <div class="jumbotron">
                 <div class="btn-group" data-toggle="buttons">
-                    <s:radiobuttons path="type" items="${types}" itemLabel="label" element="span class='btn btn-primary'"/>
+                    <s:radiobuttons path="type" items="${types}" itemLabel="label"
+                                    element="span class='btn btn-primary'"/>
                 </div>
                 <br/>
                 <br/>
 
                 <div class="btn-group" data-toggle="buttons">
-                    <s:radiobuttons path="day" items="${days}" itemLabel="label" element="span class='btn btn-primary'"/>
+                    <s:radiobuttons path="day" items="${days}" itemLabel="label"
+                                    element="span class='btn btn-primary'"/>
                 </div>
 
             </div>

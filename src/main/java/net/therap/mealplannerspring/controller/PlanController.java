@@ -39,7 +39,7 @@ public class PlanController {
         helper.addPlan(meal);
         model.put(Constants.ADD_PLAN_NOTIFY, PLAN_ADDED);
 
-        return "redirect:"+Constants.ADD_PLAN_PATH;
+        return "redirect:" + Constants.ADD_PLAN_PATH;
     }
 
     @RequestMapping(value = Constants.ADD_PLAN_PATH, method = RequestMethod.GET)

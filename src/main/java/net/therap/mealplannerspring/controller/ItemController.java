@@ -21,11 +21,9 @@ public class ItemController {
 
     private static final String ITEM_ADDED = "Item added";
 
-    @Autowired
-    private Service helper;
-
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.POST)
     public String add(@ModelAttribute Item item, ModelMap model) {
+        Service helper = new Service();
 
         helper.addItem(item);
         model.put(Constants.ADD_ITEM_NOTIFY, ITEM_ADDED);

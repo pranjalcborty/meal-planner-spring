@@ -20,7 +20,7 @@ public class Meal {
     @Column(name = "meal_id")
     private long id;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "meal_item",
             joinColumns = {@JoinColumn(name = "meal_id")},
             inverseJoinColumns = {@JoinColumn(name = "item_id")})
