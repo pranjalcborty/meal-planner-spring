@@ -9,6 +9,8 @@ import net.therap.mealplannerspring.domain.Meal;
 import net.therap.mealplannerspring.domain.User;
 import net.therap.mealplannerspring.enums.Day;
 import net.therap.mealplannerspring.enums.Type;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,30 +20,17 @@ import java.util.Map;
  * @author pranjal.chakraborty
  * @since 5/10/17
  */
-public class Service {
+@Service
+public class SysService {
 
-    private static final Map<Integer, Day> dayMap = new HashMap<>();
-    private static final Map<Integer, Type> typeMap = new HashMap<>();
+    @Autowired
     private MealDao mealDao;
+
+    @Autowired
     private ItemDao itemDao;
+
+    @Autowired
     private UserDao userDao;
-
-    static {
-        dayMap.put(1, Day.SUN);
-        dayMap.put(2, Day.MON);
-        dayMap.put(3, Day.TUE);
-        dayMap.put(4, Day.WED);
-        dayMap.put(5, Day.THU);
-
-        typeMap.put(1, Type.BREAKFAST);
-        typeMap.put(2, Type.LUNCH);
-    }
-
-    public Service() {
-        this.mealDao = new MealDao();
-        this.itemDao = new ItemDao();
-        this.userDao = new UserDao();
-    }
 
     public List<Meal> showMealPlans() {
         List<Meal> meals = mealDao.getMeals();

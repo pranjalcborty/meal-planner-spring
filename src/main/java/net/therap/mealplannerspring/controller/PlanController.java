@@ -5,8 +5,9 @@ import net.therap.mealplannerspring.domain.Meal;
 import net.therap.mealplannerspring.enums.Day;
 import net.therap.mealplannerspring.enums.Type;
 import net.therap.mealplannerspring.helper.Constants;
-import net.therap.mealplannerspring.service.Service;
+import net.therap.mealplannerspring.service.SysService;
 import net.therap.mealplannerspring.web.editor.ItemEditor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
@@ -25,6 +26,12 @@ import java.util.List;
 public class PlanController {
 
     private static final String PLAN_ADDED = "Plan added";
+    private static final String MEAL_TAG = "meal";
+    private static final String DAYS_TAG = "days";
+    private static final String TYPES_TAG = "types";
+
+    @Autowired
+    private SysService helper;
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -34,31 +41,29 @@ public class PlanController {
     @RequestMapping(value = Constants.ADD_PLAN_PATH, method = RequestMethod.POST)
     public String add(@ModelAttribute Meal meal, ModelMap model) {
 
-        Service helper = new Service();
-
         helper.addPlan(meal);
         model.put(Constants.ADD_PLAN_NOTIFY, PLAN_ADDED);
 
-        return "redirect:" + Constants.ADD_PLAN_PATH;
+        return Constants.REDIRECT_TAG + Constants.ADD_PLAN_PATH;
     }
 
     @RequestMapping(value = Constants.ADD_PLAN_PATH, method = RequestMethod.GET)
     public String view(ModelMap model) {
-        Service helper = new Service();
+
         List<Item> items = helper.showItems();
 
         model.put(Constants.ITEM_LIST, items);
 
-        model.put("meal", new Meal());
-        model.put("days", Day.values());
-        model.put("types", Type.values());
+        model.put(MEAL_TAG, new Meal());
+        model.put(DAYS_TAG, Day.values());
+        model.put(TYPES_TAG, Type.values());
 
         return Constants.ABS_ADD_PLAN_PATH;
     }
 
     @RequestMapping(value = Constants.VIEW_PLANS_PATH, method = RequestMethod.GET)
     protected String mealList(ModelMap model) {
-        Service helper = new Service();
+
         List<Meal> meals = helper.showMealPlans();
 
         model.put(Constants.MEAL_LIST, meals);

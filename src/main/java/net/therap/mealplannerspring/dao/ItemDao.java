@@ -1,29 +1,31 @@
 package net.therap.mealplannerspring.dao;
 
 import net.therap.mealplannerspring.domain.Item;
-import net.therap.mealplannerspring.helper.JpaHelper;
-
+import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author pranjal.chakraborty
  * @since 5/11/17
  */
+@Repository
 public class ItemDao {
     private static final String RETRIEVE_ITEM_QUERY = "SELECT i FROM Item i";
 
+    @PersistenceContext
+    private EntityManager em;
+
+    @Transactional
     public void addItem(Item item) {
-        EntityManager em = JpaHelper.getEntityManager();
-        em.getTransaction().begin();
-        em.merge(item);
-        em.getTransaction().commit();
-        em.close();
+        em.persist(item);
     }
 
+    @Transactional
     public List<Item> generateItems() {
-        EntityManager em = JpaHelper.getEntityManager();
         TypedQuery<Item> query = em.createQuery(RETRIEVE_ITEM_QUERY, Item.class);
 
         List<Item> items = query.getResultList();

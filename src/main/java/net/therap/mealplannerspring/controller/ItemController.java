@@ -2,7 +2,7 @@ package net.therap.mealplannerspring.controller;
 
 import net.therap.mealplannerspring.domain.Item;
 import net.therap.mealplannerspring.helper.Constants;
-import net.therap.mealplannerspring.service.Service;
+import net.therap.mealplannerspring.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,14 +21,16 @@ public class ItemController {
 
     private static final String ITEM_ADDED = "Item added";
 
+    @Autowired
+    private SysService helper;
+
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.POST)
     public String add(@ModelAttribute Item item, ModelMap model) {
-        Service helper = new Service();
 
         helper.addItem(item);
         model.put(Constants.ADD_ITEM_NOTIFY, ITEM_ADDED);
 
-        return "redirect:" + Constants.ADD_ITEM_PATH;
+        return Constants.REDIRECT_TAG + Constants.ADD_ITEM_PATH;
     }
 
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.GET)
@@ -38,7 +40,6 @@ public class ItemController {
 
     @RequestMapping(value = Constants.VIEW_ITEMS_PATH, method = RequestMethod.GET)
     public String itemList(ModelMap model) {
-        Service helper = new Service();
         List<Item> items = helper.showItems();
 
         model.put(Constants.ITEM_LIST, items);
