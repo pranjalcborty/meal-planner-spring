@@ -14,6 +14,5 @@ public class ItemEditor extends PropertyEditorSupport {
         item.setId(id);
 
         setValue(item);
-
     }
 }
