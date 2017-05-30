@@ -38,7 +38,7 @@
             <h3>Hello <c:out value="${uname}"/></h3>
             <a href="viewPlans" class="btn btn-info" role="button">See current plans</a><br/>
             <a href="viewItems" class="btn btn-info" role="button">See current items</a><br/>
-            <a href="addItem" class="btn btn-info" role="button">Add a item</a><br/>
+            <a href="addItem" class="btn btn-info" role="button">Add an item</a><br/>
             <a href="addPlan" class="btn btn-info" role="button">Add your own plan</a><br><br/>
 
             <form action="logout" method="POST">

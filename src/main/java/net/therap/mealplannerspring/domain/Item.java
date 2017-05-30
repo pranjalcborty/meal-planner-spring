@@ -1,7 +1,7 @@
 package net.therap.mealplannerspring.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author pranjal.chakraborty
@@ -17,7 +17,7 @@ public class Item {
     private long id;
 
     @Column(name = "item_name")
-    @NotNull(message = "Item name cannot be blank")
+    @Size(min = 1)
     private String name;
 
     public long getId() {

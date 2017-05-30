@@ -23,6 +23,7 @@ import java.util.List;
 public class ItemController {
 
     private static final String ITEM_ADDED = "Item added";
+    private static final String ITEM_NOT_ADDED = "Item not added";
 
     @Autowired
     private ItemService service;
@@ -30,7 +31,8 @@ public class ItemController {
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.POST)
     public String add(@Valid @ModelAttribute Item item, BindingResult result, HttpSession session) {
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
+            session.setAttribute(Constants.ADD_ITEM_NOTIFY, ITEM_NOT_ADDED);
             return Constants.REDIRECT_TAG + Constants.ADD_ITEM_PATH;
         }
         service.addItem(item);
@@ -40,7 +42,12 @@ public class ItemController {
     }
 
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.GET)
-    public String view() {
+    public String view(ModelMap model, HttpSession session) {
+
+        if (session.getAttribute(Constants.ADD_ITEM_NOTIFY) != null) {
+            model.put(Constants.ADD_ITEM_NOTIFY, session.getAttribute(Constants.ADD_ITEM_NOTIFY));
+            session.removeAttribute(Constants.ADD_ITEM_NOTIFY);
+        }
         return Constants.ABS_ADD_ITEM_PATH;
     }
 

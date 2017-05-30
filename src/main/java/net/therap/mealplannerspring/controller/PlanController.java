@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import java.util.List;
 public class PlanController {
 
     private static final String PLAN_ADDED = "Plan added";
+    private static final String PLAN_NOT_ADDED = "Plan not added";
     private static final String MEAL_TAG = "meal";
     private static final String DAYS_TAG = "days";
     private static final String TYPES_TAG = "types";
@@ -45,19 +47,25 @@ public class PlanController {
     }
 
     @RequestMapping(value = Constants.ADD_PLAN_PATH, method = RequestMethod.POST)
-    public String add(@Valid @ModelAttribute Meal meal, BindingResult result, ModelMap model) {
+    public String add(@Valid @ModelAttribute Meal meal, BindingResult result, HttpSession session) {
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
+            session.setAttribute(Constants.ADD_PLAN_NOTIFY, PLAN_NOT_ADDED);
             return Constants.REDIRECT_TAG + Constants.ADD_PLAN_PATH;
         }
         mealService.addPlan(meal);
-        model.put(Constants.ADD_PLAN_NOTIFY, PLAN_ADDED);
+        session.setAttribute(Constants.ADD_PLAN_NOTIFY, PLAN_ADDED);
 
         return Constants.REDIRECT_TAG + Constants.ADD_PLAN_PATH;
     }
 
     @RequestMapping(value = Constants.ADD_PLAN_PATH, method = RequestMethod.GET)
-    public String view(ModelMap model) {
+    public String view(ModelMap model, HttpSession session) {
+
+        if (session.getAttribute(Constants.ADD_PLAN_NOTIFY) != null) {
+            model.put(Constants.ADD_PLAN_NOTIFY, session.getAttribute(Constants.ADD_PLAN_NOTIFY));
+            session.removeAttribute(Constants.ADD_PLAN_NOTIFY);
+        }
 
         List<Item> items = itemService.showItems();
 

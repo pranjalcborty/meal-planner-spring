@@ -22,20 +22,19 @@ import javax.validation.Valid;
 public class RegisterController {
 
     private static final String USERNAME_EXISTS = "Username exists";
-    private static final String BLANK_ERROR = "Name, username or password cannot be blank";
 
     @Autowired
     private UserService service;
 
     @RequestMapping(value = Constants.REGISTER_PATH, method = RequestMethod.POST)
-    public String postRegistration(@Valid @ModelAttribute User user, BindingResult errors, ModelMap model) {
+    public String postRegistration(@Valid @ModelAttribute User user, BindingResult errors, HttpSession session) {
 
         if (errors.hasErrors()) {
             return Constants.REDIRECT_TAG + Constants.REGISTER_PATH;
         }
 
         if (service.contains(user.getUname())) {
-            model.put(Constants.FAILURE_NOTIFY, USERNAME_EXISTS);
+            session.setAttribute(Constants.FAILURE_NOTIFY, USERNAME_EXISTS);
             return Constants.REDIRECT_TAG + Constants.REGISTER_PATH;
         }
 
@@ -44,7 +43,12 @@ public class RegisterController {
     }
 
     @RequestMapping(value = Constants.REGISTER_PATH, method = RequestMethod.GET)
-    public String getRegistration(HttpSession session) {
+    public String getRegistration(HttpSession session, ModelMap model) {
+
+        if (session.getAttribute(Constants.FAILURE_NOTIFY) != null) {
+            model.put(Constants.FAILURE_NOTIFY, session.getAttribute(Constants.FAILURE_NOTIFY));
+            session.removeAttribute(Constants.FAILURE_NOTIFY);
+        }
 
         if (session.getAttribute(Constants.USER_NAME) != null) {
             return Constants.REDIRECT_TAG + Constants.HOME_PATH;
