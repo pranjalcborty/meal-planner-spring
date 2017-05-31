@@ -21,7 +21,7 @@ public class UserLoginValidator implements Validator {
     public void validate(Object target, Errors errors) {
         UserLogin userLogin = (UserLogin) target;
 
-        if(!service.isAllowed(userLogin)) {
+        if (!service.isAllowed(userLogin)) {
             errors.reject("userNotAllowed");
         }
     }
