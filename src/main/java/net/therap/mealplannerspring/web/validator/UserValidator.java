@@ -1,28 +1,28 @@
 package net.therap.mealplannerspring.web.validator;
 
-import net.therap.mealplannerspring.domain.Item;
-import net.therap.mealplannerspring.service.ItemService;
+import net.therap.mealplannerspring.domain.User;
+import net.therap.mealplannerspring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class ItemValidator implements Validator {
+public class UserValidator implements Validator {
     @Autowired
-    private ItemService itemService;
+    private UserService userService;
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Item.class.isAssignableFrom(clazz);
+        return User.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        Item item = (Item) target;
+        User user = (User) target;
 
-        if (itemService.contains(item)) {
-            errors.reject("name");
+        if (userService.contains(user)) {
+            errors.reject("uname");
         }
     }
 }

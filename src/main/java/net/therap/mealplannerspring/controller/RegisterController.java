@@ -3,6 +3,7 @@ package net.therap.mealplannerspring.controller;
 import net.therap.mealplannerspring.domain.User;
 import net.therap.mealplannerspring.helper.Constants;
 import net.therap.mealplannerspring.service.UserService;
+import net.therap.mealplannerspring.web.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,16 +26,15 @@ public class RegisterController {
 
     @Autowired
     private UserService service;
+    @Autowired
+    private UserValidator validator;
 
     @RequestMapping(value = Constants.REGISTER_PATH, method = RequestMethod.POST)
     public String postRegistration(@Valid @ModelAttribute User user, BindingResult errors, HttpSession session) {
 
-        if (errors.hasErrors()) {
-            return Constants.REDIRECT_TAG + Constants.REGISTER_PATH;
-        }
+        validator.validate(user, errors);
 
-        if (service.contains(user.getUname())) {
-            session.setAttribute(Constants.FAILURE_NOTIFY, USERNAME_EXISTS);
+        if (errors.hasErrors()) {
             return Constants.REDIRECT_TAG + Constants.REGISTER_PATH;
         }
 

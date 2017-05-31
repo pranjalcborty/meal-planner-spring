@@ -27,18 +27,11 @@ public class UserDao {
     }
 
     @Transactional
-    public boolean contains(String uName) {
+    public List<User> getUsers() {
         TypedQuery<User> query = em.createQuery(RETRIEVE_USER_QUERY, User.class);
-
         List<User> users = query.getResultList();
 
-        for (User user : users) {
-            if (user.getUname().equals(uName)) {
-                return true;
-            }
-        }
-
-        return false;
+        return users;
     }
 
     @Transactional

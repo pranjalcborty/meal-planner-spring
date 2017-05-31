@@ -5,6 +5,8 @@ import net.therap.mealplannerspring.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -15,8 +17,16 @@ public class UserService {
         return userDao.isAllowed(uname, pass);
     }
 
-    public boolean contains(String uName) {
-        return userDao.contains(uName);
+    public boolean contains(User userFetch) {
+        List<User> users = userDao.getUsers();
+
+        for (User user : users) {
+            if (user.getUname().equals(userFetch.getUname())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void addUser(User user) {

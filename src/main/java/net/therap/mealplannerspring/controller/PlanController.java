@@ -8,6 +8,7 @@ import net.therap.mealplannerspring.helper.Constants;
 import net.therap.mealplannerspring.service.ItemService;
 import net.therap.mealplannerspring.service.MealService;
 import net.therap.mealplannerspring.web.editor.ItemEditor;
+import net.therap.mealplannerspring.web.validator.MealValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,9 +38,10 @@ public class PlanController {
 
     @Autowired
     private MealService mealService;
-
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private MealValidator validator;
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -48,6 +50,8 @@ public class PlanController {
 
     @RequestMapping(value = Constants.ADD_PLAN_PATH, method = RequestMethod.POST)
     public String add(@Valid @ModelAttribute Meal meal, BindingResult result, HttpSession session) {
+
+        validator.validate(meal, result);
 
         if (result.hasErrors()) {
             session.setAttribute(Constants.ADD_PLAN_NOTIFY, PLAN_NOT_ADDED);

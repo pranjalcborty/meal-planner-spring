@@ -21,4 +21,16 @@ public class MealService {
     public void addPlan(Meal meal) {
         mealDao.addItemsToMeal(meal);
     }
+
+    public boolean contains(Meal mealFetch) {
+        List<Meal> meals = showMealPlans();
+
+        for (Meal meal : meals) {
+            if (meal.getType().equals(mealFetch.getType()) && meal.getDay().equals(mealFetch.getDay())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

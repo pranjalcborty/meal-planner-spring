@@ -22,4 +22,16 @@ public class ItemService {
         List<Item> items = itemDao.generateItems();
         return items;
     }
+
+    public boolean contains(Item itemFetch) {
+        List<Item> items = showItems();
+
+        for (Item item : items) {
+            if (itemFetch.getName().equals(item.getName())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

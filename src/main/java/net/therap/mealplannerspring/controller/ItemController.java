@@ -3,6 +3,7 @@ package net.therap.mealplannerspring.controller;
 import net.therap.mealplannerspring.domain.Item;
 import net.therap.mealplannerspring.helper.Constants;
 import net.therap.mealplannerspring.service.ItemService;
+import net.therap.mealplannerspring.web.validator.ItemValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,9 +28,13 @@ public class ItemController {
 
     @Autowired
     private ItemService service;
+    @Autowired
+    private ItemValidator validator;
 
     @RequestMapping(value = Constants.ADD_ITEM_PATH, method = RequestMethod.POST)
     public String add(@Valid @ModelAttribute Item item, BindingResult result, HttpSession session) {
+
+        validator.validate(item, result);
 
         if (result.hasErrors()) {
             session.setAttribute(Constants.ADD_ITEM_NOTIFY, ITEM_NOT_ADDED);
