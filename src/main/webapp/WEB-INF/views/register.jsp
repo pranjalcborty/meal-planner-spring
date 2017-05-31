@@ -47,7 +47,6 @@
 
             <c:if test="${failureMessage != null}">
                 <strong><c:out value="${failureMessage}"/></strong><br/>
-                <% request.getSession().removeAttribute("failureMessage"); %>
             </c:if>
 
         </div>

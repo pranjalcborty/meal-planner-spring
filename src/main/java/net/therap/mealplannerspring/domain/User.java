@@ -18,15 +18,15 @@ public class User {
     private int id;
 
     @Column(name = "full_name")
-    @NotNull(message = "Full  name cannot be null")
+    @NotNull
     private String fullName;
 
     @Column(name = "user_name")
-    @NotNull(message = "Username cannot be null")
+    @NotNull
     private String uname;
 
     @Column(name = "password")
-    @Size(min = 6, message = "Password must be greater than 5 in length")
+    @Size(min = 6)
     private String pass;
 
     public int getId() {

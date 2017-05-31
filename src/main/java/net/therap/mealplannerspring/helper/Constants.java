@@ -27,4 +27,9 @@ public interface Constants {
     String ITEM_LIST = "items";
     String MEAL_LIST = "meals";
     String REDIRECT_TAG = "redirect:";
+
+    String REGISTRATION_ERROR = "Check: \n " +
+            "1. Username exists \n" +
+            "2. Password must be grater than 5 in length \n" +
+            "3. Full Name and username cannot be empty";
 }

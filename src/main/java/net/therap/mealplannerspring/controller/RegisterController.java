@@ -22,8 +22,6 @@ import javax.validation.Valid;
 @Controller
 public class RegisterController {
 
-    private static final String USERNAME_EXISTS = "Username exists";
-
     @Autowired
     private UserService service;
     @Autowired
@@ -35,6 +33,7 @@ public class RegisterController {
         validator.validate(user, errors);
 
         if (errors.hasErrors()) {
+            session.setAttribute(Constants.FAILURE_NOTIFY, Constants.REGISTRATION_ERROR);
             return Constants.REDIRECT_TAG + Constants.REGISTER_PATH;
         }
 

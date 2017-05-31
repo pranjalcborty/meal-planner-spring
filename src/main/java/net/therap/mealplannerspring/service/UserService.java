@@ -2,6 +2,7 @@ package net.therap.mealplannerspring.service;
 
 import net.therap.mealplannerspring.dao.UserDao;
 import net.therap.mealplannerspring.domain.User;
+import net.therap.mealplannerspring.domain.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,16 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public boolean isAllowed(String uname, String pass) {
-        return userDao.isAllowed(uname, pass);
+    public boolean isAllowed(UserLogin userLogin) {
+        List<User> users = userDao.getUsers();
+
+        for (User user : users) {
+            if (user.getUname().equals(userLogin.getUserName()) && user.getPass().equals(userLogin.getPassword())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean contains(User userFetch) {

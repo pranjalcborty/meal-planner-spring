@@ -33,19 +33,4 @@ public class UserDao {
 
         return users;
     }
-
-    @Transactional
-    public boolean isAllowed(String uName, String pass) {
-        TypedQuery<User> query = em.createQuery(RETRIEVE_USER_QUERY, User.class);
-
-        List<User> users = query.getResultList();
-
-        for (User user : users) {
-            if (user.getUname().equals(uName) && user.getPass().equals(pass)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

@@ -1,15 +1,20 @@
 package net.therap.mealplannerspring.controller;
 
 
+import net.therap.mealplannerspring.domain.UserLogin;
 import net.therap.mealplannerspring.helper.Constants;
 import net.therap.mealplannerspring.service.UserService;
+import net.therap.mealplannerspring.web.validator.UserLoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import static net.therap.mealplannerspring.helper.Constants.*;
 
@@ -24,6 +29,8 @@ public class AuthController {
 
     @Autowired
     private UserService service;
+    @Autowired
+    private UserLoginValidator validator;
 
     @RequestMapping(value = Constants.LOGIN_PATH, method = RequestMethod.GET)
     public String getAuth(HttpSession session) {
@@ -35,11 +42,12 @@ public class AuthController {
     }
 
     @RequestMapping(value = Constants.LOGIN_PATH, method = RequestMethod.POST)
-    public String postAuth(@RequestParam(Constants.USER_NAME) String userName,
-                           @RequestParam(Constants.PASSWORD) String password, HttpSession session) {
+    public String postAuth(@Valid @ModelAttribute UserLogin user, BindingResult result, HttpSession session) {
 
-        if (service.isAllowed(userName, password)) {
-            session.setAttribute(USER_NAME, userName);
+        validator.validate(user, result);
+
+        if (!result.hasErrors()) {
+            session.setAttribute(USER_NAME, user.getUserName());
             session.setMaxInactiveInterval(10 * 60);
 
             return Constants.REDIRECT_TAG + HOME_PATH;
