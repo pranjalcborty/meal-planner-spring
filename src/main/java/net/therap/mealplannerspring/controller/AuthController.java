@@ -27,8 +27,6 @@ public class AuthController {
     private final static String MATCH_ERROR = "ID/Pass don't match";
 
     @Autowired
-    private UserService service;
-    @Autowired
     private UserLoginValidator validator;
 
     @RequestMapping(value = Constants.LOGIN_PATH, method = RequestMethod.GET)
