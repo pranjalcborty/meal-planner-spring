@@ -36,16 +36,17 @@
 <div class="container">
     <div class="absolute-center is-responsive">
         <div class="jumbotron">
+            <strong><c:out value="${name}"/></strong>
+
             <form action="login" method="POST">
-                Enter username: <input class="form-control" type="text" name="uname"><br/>
-                Enter password: <input class="form-control" type="password" name="pass"><br/><br/>
+                Enter username: <input class="form-control" type="text" name="userName"><br/>
+                Enter password: <input class="form-control" type="password" name="password"><br/><br/>
 
                 <button class="btn btn-success" type="submit" role="button">Login</button>
                 <a href="register" class="btn btn-info" role="button">Register</a>
             </form>
             <c:if test="${failureMessage != null}">
                 <strong><c:out value="${failureMessage}"/></strong><br/>
-                <% request.getSession().removeAttribute("failureMessage"); %>
             </c:if>
         </div>
     </div>

@@ -1,63 +1,36 @@
 package net.therap.mealplannerspring.dao;
 
 import net.therap.mealplannerspring.domain.User;
-import net.therap.mealplannerspring.helper.HibernateHelper;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * @author pcbor
+ * @author pranjal.chakraborty
  * @since 20-May-17
  */
+@Repository
 public class UserDao {
-    public boolean addUser(String fullName, String uName, String pass) {
-        if (!contains(uName)) {
-            User user = new User();
-            user.setFullName(fullName);
-            user.setUname(uName);
-            user.setPass(pass);
 
-            Session session = HibernateHelper.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
-            session.close();
+    private static final String RETRIEVE_USER_QUERY = "SELECT u FROM User u";
 
-            return true;
-        }
+    @PersistenceContext
+    private EntityManager em;
 
-        return false;
+    @Transactional
+    public void addUser(User user) {
+        em.persist(user);
     }
 
-    public boolean contains(String uName) {
-        Session session = HibernateHelper.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM User");
+    @Transactional
+    public List<User> getUsers() {
+        TypedQuery<User> query = em.createQuery(RETRIEVE_USER_QUERY, User.class);
+        List<User> users = query.getResultList();
 
-        List<User> users = query.list();
-
-        for (User user : users) {
-            if (user.getUname().equals(uName)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean isAllowed(String uName, String pass) {
-        Session session = HibernateHelper.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM User");
-
-        List<User> users = query.list();
-
-        for (User user : users) {
-            if (user.getUname().equals(uName) && user.getPass().equals(pass)) {
-                return true;
-            }
-        }
-
-        return false;
+        return users;
     }
 }

@@ -4,6 +4,8 @@ import net.therap.mealplannerspring.enums.Day;
 import net.therap.mealplannerspring.enums.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,18 +22,21 @@ public class Meal {
     @Column(name = "meal_id")
     private long id;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "meal_item",
             joinColumns = {@JoinColumn(name = "meal_id")},
             inverseJoinColumns = {@JoinColumn(name = "item_id")})
+    @Size(min = 1)
     private List<Item> items;
 
     @Enumerated(EnumType.STRING)
     @Column
+    @NotNull
     private Day day;
 
     @Enumerated(EnumType.STRING)
     @Column
+    @NotNull
     private Type type;
 
     public Meal() {

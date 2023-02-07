@@ -1,46 +1,35 @@
 package net.therap.mealplannerspring.dao;
 
 import net.therap.mealplannerspring.domain.Item;
-import net.therap.mealplannerspring.helper.HibernateHelper;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author pranjal.chakraborty
  * @since 5/11/17
  */
+@Repository
 public class ItemDao {
+    private static final String RETRIEVE_ITEM_QUERY = "SELECT i FROM Item i";
 
-    public void addItem(String itemName) {
-        Item item = new Item();
-        item.setName(itemName);
+    @PersistenceContext
+    private EntityManager em;
 
-        Session session = HibernateHelper.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
+    @Transactional
+    public void addItem(Item item) {
+        em.persist(item);
     }
 
+    @Transactional
     public List<Item> generateItems() {
-        Session session = HibernateHelper.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM Item");
+        TypedQuery<Item> query = em.createQuery(RETRIEVE_ITEM_QUERY, Item.class);
 
-        List<Item> items = query.list();
-        session.close();
-        return items;
-    }
-
-    public List<Item> getItems(List<String> tokens) {
-        List<Item> items = new ArrayList<>();
-
-        for (String token : tokens) {
-            Session session = HibernateHelper.getSessionFactory().openSession();
-            items.add((Item) session.get(Item.class, Long.parseLong(token)));
-        }
+        List<Item> items = query.getResultList();
         return items;
     }
 }

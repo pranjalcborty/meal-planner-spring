@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="s" %>
+
 <html>
 <head>
     <title>Add item</title>
@@ -36,16 +38,20 @@
 <div class="container">
     <div class="absolute-center is-responsive">
         <div class="jumbotron">
-            <form action="addItem" method="POST">
-                Item Name: <input class="form-control" type="text" name="item_name">
+
+            <s:form method="POST">
+                Item Name: <input class="form-control" type="text" name="name">
                 <button
                         class="btn btn-success" type="submit" role="button">Add
                 </button>
-            </form>
+            </s:form>
+
             <c:if test="${messageAddItem != null}">
                 <div><strong><c:out value="${messageAddItem}"/></strong></div>
             </c:if>
+
             <a href="home" class="btn btn-info" role="button">Return to main page</a>
+
         </div>
     </div>
 </div>

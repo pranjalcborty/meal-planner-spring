@@ -1,6 +1,8 @@
 package net.therap.mealplannerspring.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author pranjal.chakraborty
@@ -16,12 +18,15 @@ public class User {
     private int id;
 
     @Column(name = "full_name")
+    @NotNull
     private String fullName;
 
     @Column(name = "user_name")
+    @NotNull
     private String uname;
 
     @Column(name = "password")
+    @Size(min = 6)
     private String pass;
 
     public int getId() {

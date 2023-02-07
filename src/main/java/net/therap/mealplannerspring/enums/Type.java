@@ -5,5 +5,16 @@ package net.therap.mealplannerspring.enums;
  * @since 5/10/17
  */
 public enum Type {
-    BREAKFAST, LUNCH
+    BREAKFAST("Breakfast"),
+    LUNCH("Lunch");
+
+    private String label;
+
+    Type(String label) {
+        this.label = label;
+    }
+
+    public String getLabel() {
+        return label;
+    }
 }

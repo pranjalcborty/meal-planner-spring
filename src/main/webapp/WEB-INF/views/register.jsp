@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -36,16 +37,18 @@
 <div class="container">
     <div class="absolute-center is-responsive">
         <div class="jumbotron">
-            <form action="register" method="POST">
-                Enter full name: <input class="form-control" type="text" name="fullname"><br/>
+
+            <s:form method="POST">
+                Enter full name: <input class="form-control" type="text" name="fullName"><br/>
                 Enter username: <input class="form-control" type="text" name="uname"><br/>
                 Enter password: <input class="form-control" type="password" name="pass"><br/><br/>
                 <button class="btn btn-success" type="submit" role="button">Register</button>
-            </form>
+            </s:form>
+
             <c:if test="${failureMessage != null}">
                 <strong><c:out value="${failureMessage}"/></strong><br/>
-                <% request.getSession().removeAttribute("failureMessage"); %>
             </c:if>
+
         </div>
     </div>
 </div>
